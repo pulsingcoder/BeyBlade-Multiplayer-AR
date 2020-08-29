@@ -16,7 +16,7 @@ public class BeybladeGameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         ui_InfoPanelGameObejct.SetActive(true);
-        ui_InfoText.text = "Search for games to battle";
+       
         
     }
 
