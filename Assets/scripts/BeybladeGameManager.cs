@@ -35,6 +35,19 @@ public class BeybladeGameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
         SearchForGameButtonObject.SetActive(false);
     }
+
+
+    public void OnClickQuitMatchButton()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+        else
+        {
+            SceneLoader.Instance.LoadScene("Scene_Lobby");
+        }
+    }
     #endregion
 
 
@@ -65,6 +78,11 @@ public class BeybladeGameManager : MonoBehaviourPunCallbacks
         Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " Player count " + PhotonNetwork.CurrentRoom.PlayerCount);
         ui_InfoText.text = newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " Player count " + PhotonNetwork.CurrentRoom.PlayerCount;
         StartCoroutine(DeactivateAfterSeconds(ui_InfoPanelGameObejct, 2.0f));
+    }
+
+    public override void OnLeftRoom()
+    {
+        SceneLoader.Instance.LoadScene("Scene_Lobby");
     }
     #endregion
 

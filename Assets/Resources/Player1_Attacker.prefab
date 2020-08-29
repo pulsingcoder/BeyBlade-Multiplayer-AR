@@ -309,6 +309,8 @@ GameObject:
   - component: {fileID: 6544455718307551897}
   - component: {fileID: 7234677685287681914}
   - component: {fileID: 8953608541331885737}
+  - component: {fileID: 4202730826783140674}
+  - component: {fileID: 8058540694251943595}
   m_Layer: 0
   m_Name: Player1_Attacker
   m_TagString: Player
@@ -421,10 +423,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  observableSearch: 2
-  Synchronization: 0
+  observableSearch: 0
+  Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 4202730826783140674}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -441,6 +444,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 2523371896480695254}
+--- !u!114 &4202730826783140674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2523371896380985836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d4607a09466cf468e3d89834313809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizedVelocity: 1
+  synchronizedAngularVelocity: 1
+  isTeleportEnabled: 1
+  teleportIfDistanceGreaterThan: 1
+--- !u!114 &8058540694251943595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2523371896380985836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8c8bcd08bea7c43aabdfd6b8bdca83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinnerScript: {fileID: 6544455718307551897}
+  commonDamageCoefficient: 0.04
+  isAttacker: 0
+  isDefender: 0
+  spinSpeedBar_Image: {fileID: 2523371896873197419}
+  spinSpeedRatio_Text: {fileID: 4278660854099477796}
+  uI_3DGameObject: {fileID: 2523371896678793442}
+  deathPanelUIPrefab: {fileID: 3593783272886976281, guid: 0367e5d2c0c49da4b80c7fe1c169056c,
+    type: 3}
+  do_Damage_Coefficient_Attacker: 10
+  get_Damage_Coeeficient_Attacker: 1.2
+  do_Damage_Coefficient_Defender: 0.75
+  get_Damage_Coeeficient_Defender: 0.2
 --- !u!1 &2523371896480695252
 GameObject:
   m_ObjectHideFlags: 0
