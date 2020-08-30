@@ -12,6 +12,8 @@ public class BeybladeGameManager : MonoBehaviourPunCallbacks
     public GameObject ui_InfoPanelGameObejct;
     public TextMeshProUGUI ui_InfoText;
     public GameObject SearchForGameButtonObject;
+    public GameObject adjustButton;
+    public GameObject rayCastCenter_Image;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +63,8 @@ public class BeybladeGameManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        adjustButton.SetActive(false);
+        rayCastCenter_Image.SetActive(false);
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             ui_InfoText.text = "joined to " + PhotonNetwork.CurrentRoom.Name + " waiting for other players to join......";

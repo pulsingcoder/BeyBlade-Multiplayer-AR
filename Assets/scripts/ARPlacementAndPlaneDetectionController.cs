@@ -13,6 +13,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     public GameObject placeButton;
     public GameObject adjustButton;
     public GameObject searchForGameButton;
+    public GameObject scaleSlider;
     public TextMeshProUGUI informUIPanelText;
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         placeButton.SetActive(true);
         adjustButton.SetActive(false);
         searchForGameButton.SetActive(false);
+        scaleSlider.SetActive(true);
         informUIPanelText.text = "Move phone to detect plane and place battle arena";
     }
 
@@ -42,6 +44,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         placeButton.SetActive(false);
         adjustButton.SetActive(true);
         searchForGameButton.SetActive(true);
+        scaleSlider.SetActive(false);
         informUIPanelText.text = "Great! You have placed the battle arena. Now, search for game to BATTLE!";
 
     }
@@ -54,6 +57,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         placeButton.SetActive(true);
         adjustButton.SetActive(false);
         searchForGameButton.SetActive(false);
+        scaleSlider.SetActive(true);
         informUIPanelText.text = "Move phone to detect plane and place battle arena";
     }
 

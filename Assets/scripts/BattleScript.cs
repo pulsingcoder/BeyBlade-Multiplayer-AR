@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -26,6 +27,57 @@ public class BattleScript : MonoBehaviourPun
     public float get_Damage_Coeeficient_Attacker = 1.2f;  // get more damage // Disadvantage
     public float do_Damage_Coefficient_Defender = 0.75f;  // do less damage // Disadvantage
     public float get_Damage_Coeeficient_Defender = 0.2f; // get less damage // Advantage
+
+
+
+
+    public List<GameObject> pooledObjects;
+    public int amountToPool = 8;
+    public GameObject CollisionEffectPrefab;
+    // Start is called before the first frame update
+    void Start()
+    {
+        CheckPlayerType();
+
+        rb = GetComponent<Rigidbody>();
+
+
+        if (photonView.IsMine)
+        {
+            pooledObjects = new List<GameObject>();
+            for (int i = 0; i < amountToPool; i++)
+            {
+                GameObject obj = (GameObject)Instantiate(CollisionEffectPrefab, Vector3.zero, Quaternion.identity);
+                obj.SetActive(false);
+                pooledObjects.Add(obj);
+            }
+        }
+
+
+
+    }
+
+    public GameObject GetPooledObject()
+    {
+
+        for (int i = 0; i < pooledObjects.Count; i++)
+        {
+
+            if (!pooledObjects[i].activeInHierarchy)
+            {
+                return pooledObjects[i];
+            }
+        }
+
+        return null;
+    }
+
+    IEnumerator DeactivateAfterSeconds(GameObject _gameObject, float _seconds)
+    {
+        yield return new WaitForSeconds(_seconds);
+        _gameObject.SetActive(false);
+
+    }
 
 
     private void Awake()
@@ -56,25 +108,30 @@ public class BattleScript : MonoBehaviourPun
 
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        CheckPlayerType();
-        rb = GetComponent<Rigidbody>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (photonView.IsMine)
+            {
+                Vector3 effectPosition = (gameObject.transform.position + collision.transform.position) / 2 + new Vector3(0, 0.05f, 0);
+
+                //Instantiate Collision Effect ParticleSystem
+                GameObject collisionEffectGameobject = GetPooledObject();
+                if (collisionEffectGameobject != null)
+                {
+                    collisionEffectGameobject.transform.position = effectPosition;
+                    collisionEffectGameobject.SetActive(true);
+                    collisionEffectGameobject.GetComponentInChildren<ParticleSystem>().Play();
+
+                    //De-activate Collision Effect Particle System after some seconds.
+                    StartCoroutine(DeactivateAfterSeconds(collisionEffectGameobject, 0.5f));
+
+                }
+            }
             float mySpeed = gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             float otherPlayerSpeed = collision.collider.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             Debug.Log("My speed " + mySpeed + "othrer player speed " + otherPlayerSpeed);

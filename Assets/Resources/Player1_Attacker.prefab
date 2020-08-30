@@ -485,6 +485,10 @@ MonoBehaviour:
   get_Damage_Coeeficient_Attacker: 1.2
   do_Damage_Coefficient_Defender: 0.75
   get_Damage_Coeeficient_Defender: 0.2
+  pooledObjects: []
+  amountToPool: 8
+  CollisionEffectPrefab: {fileID: 2219976250570092787, guid: 5137643b3ee47464683aaeed745c7403,
+    type: 3}
 --- !u!1 &2523371896480695252
 GameObject:
   m_ObjectHideFlags: 0
