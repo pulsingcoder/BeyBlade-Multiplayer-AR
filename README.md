@@ -14,5 +14,5 @@ An Augmented reality AR spinner top game (multiplayer), that allows user to have
        <BR>
          <BR>
            <B>
-             Game in still under development phase. Please come back again </B>
+             Game is still under development phase. Please come back again </B>
              
